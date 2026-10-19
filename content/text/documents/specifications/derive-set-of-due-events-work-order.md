@@ -5,12 +5,12 @@
 - `never-done-reason`: When an event has at least one occurrence at or before `now` and `lastDone` carries no entry for its id, the event is due with `reason: "never-done"` and `occurrence` set to its most recent (maximum) such occurrence.
 - `occurrence-after-last-done-reason`: When an event's most recent occurrence at or before `now` is strictly after its `lastDone` entry, the event is due with `reason: "occurrence-after-last-done"` and `occurrence` set to that most recent occurrence.
 - `not-due-omission`: An event with no occurrence at or before `now`, or whose most recent occurrence is at or before its `lastDone` entry, is omitted from `due` entirely (never returned with a "not due" reason).
-- `iso-extended-instants`: `now` and every `lastDone` value are Date-parseable ISO 8601 instants (e.g. `1997-09-05T00:00:00Z`), the same form `expand-recurrence-rule-service`'s own `window` bounds take; each event's `dtstart`/`exdate`/`rdate`/`rrule` stay in the RFC 5545 basic-UTC/RRULE-text forms `expand-recurrence-rule-service` itself requires.
+- `iso-extended-instants`: `now` and every `lastDone` value are Date-parseable `ISO 8601` instants (e.g. `1997-09-05T00:00:00Z`), the same form `expand-recurrence-rule-service`'s own `window` bounds take; each event's `dtstart`/`exdate`/`rdate`/`rrule` stay in the `RFC 5545` basic-UTC/RRULE-text forms `expand-recurrence-rule-service` itself requires.
 ## Prohibitions
-- `missing-events-refusal`: The operation must refuse (throw `TypeError`) a request whose `events` is not an array.
-- `missing-now-refusal`: The operation must refuse (throw `TypeError`) a request whose `now` is not a string.
-- `missing-event-identity-refusal`: The operation must refuse (throw `TypeError`) when any event lacks a string `id` or a string `dtstart`.
-- `no-second-expander`: The operation must not hand-implement RRULE/RDATE/EXDATE recurrence computation; it must call only `@red-cup-engineering/expand-recurrence-rule-service`'s exported `expandRecurrenceRule`.
+- `missing-events-refusal`: The operation must refuse (throw `TypeError`) a request whose `events` is not an array. [claims: malformed-input-outside-domain]
+- `missing-now-refusal`: The operation must refuse (throw `TypeError`) a request whose `now` is not a string. [claims: malformed-input-outside-domain]
+- `missing-event-identity-refusal`: The operation must refuse (throw `TypeError`) when any event lacks a string `id` or a string `dtstart`. [claims: malformed-input-outside-domain]
+- `no-second-expander`: The operation must not hand-implement RRULE/RDATE/EXDATE recurrence computation; it must call only `@red-cup-engineering/expand-recurrence-rule-service`'s exported `expandRecurrenceRule`. [claims: reuse-follows-from-single-owner, dep-expand-recurrence-rule-service]
 ## Laws
 - `primitives-exist-once` | 561 Group working discipline | 2026-08-30 | CLAUDE.md | Applies to this operation's own due-derivation step. | Recurrence-set computation is delegated to expand-recurrence-rule-service rather than re-authored.
 - `fabricate-do-not-hand-write` | 561 Group working discipline, dispatch-agents skill | 2026-09-04 | .claude/skills/dispatch-agents/SKILL.md | Applies to this whole operation source file. | The operation is born through the jsnode fabrication line from this work order, never hand-written.
@@ -20,6 +20,10 @@
 - `node-esm-operation` | Node.js | v24.2.0+ | https://nodejs.org/docs/v24/api/esm.html | Applies to the .mjs operation and its import.meta.main guard. | The package uses one executable ESM operation source file eligible for downstream staged package-birth assays.
 ## Open questions
 none
+## Claims
+- `dep-expand-recurrence-rule-service` | measured | dependency | @red-cup-engineering/expand-recurrence-rule-service@0.1.0 is published on the Group registry | none | data/records/2026-10-19-work-order-evidence/npm-view-red-cup-engineering-expand-recurrence-rule-service-0-1-0.json | sha256:1bf3aa83e122ea8583ed3d7d640a77acc341e20e8eb668908f21bcdb20225f29 | npm view of @red-cup-engineering/expand-recurrence-rule-service@0.1.0 returned its name, version and integrity (2026-10-19)
+- `malformed-input-outside-domain` | derived | world | A request or field not of its declared type lies outside the operation's input domain | none | constraint:node-esm-operation; citation:Red Cup reconcile-typed-boundaries skill, a boundary admits only its declared type | Refusing an out-of-domain input is the typed boundary's own behavior, not a further choice
+- `reuse-follows-from-single-owner` | derived | world | The primitive this operation composes has one owner, published at the exact version this order pins | none | constraint:primitives-exist-once; claim:dep-expand-recurrence-rule-service | The law places the primitive once in its owner, and the pinned owner is on the registry, so composing it leaves nothing to reimplement and a second implementation is outside what the law permits
 ## Package
 ```json
 {"packageName":"@red-cup-engineering/derive-set-of-due-events-service","packageVersion":"0.1.0","license":"MIT","dependencies":{"@red-cup-engineering/expand-recurrence-rule-service":"0.1.0"},"devDependencies":{}}

@@ -1,15 +1,15 @@
 # expand-recurrence-rule
 ## Requirements
-- `vevent-window-to-occurrences`: The operation takes one request `{dtstart, rrule?, exdate?, rdate?, window:{start,end}}` and returns `{occurrences}`, an array of ISO 8601 UTC instant strings sorted ascending, for every recurrence instance whose start falls within `[window.start, window.end]` inclusive.
-- `single-event-without-rrule`: When `rrule` is omitted, the VEVENT occurs exactly once, at `dtstart`, per RFC 5545 §3.8.5.2's recurrence-set definition — still subject to window bounds, `exdate` exclusion, and any `rdate` additions.
+- `vevent-window-to-occurrences`: The operation takes one request `{dtstart, rrule?, exdate?, rdate?, window:{start,end}}` and returns `{occurrences}`, an array of `ISO 8601` UTC instant strings sorted ascending, for every recurrence instance whose start falls within `[window.start, window.end]` inclusive.
+- `single-event-without-rrule`: When `rrule` is omitted, the VEVENT occurs exactly once, at `dtstart`, per `RFC 5545` §3.8.5.2's recurrence-set definition — still subject to window bounds, `exdate` exclusion, and any `rdate` additions.
 - `composes-rrule-library`: The operation delegates all RRULE parsing (FREQ, INTERVAL, COUNT, UNTIL, BYDAY with leading ordinals, BYMONTHDAY, BYMONTH, BYYEARDAY, BYWEEKNO, BYSETPOS, WKST) and RDATE/EXDATE set arithmetic to the published `rrule` library's own `rrulestr`/`RRuleSet`; it never re-derives recurrence expansion itself.
-- `utc-only-basic-form`: `dtstart` and every `exdate`/`rdate` value must be an RFC 5545 basic UTC date-time (`YYYYMMDDTHHMMSSZ`). This first version has no TZID or local-time support.
+- `utc-only-basic-form`: `dtstart` and every `exdate`/`rdate` value must be an `RFC 5545` basic UTC date-time (`YYYYMMDDTHHMMSSZ`). This first version has no TZID or local-time support.
 - `pure-operation`: The operation performs no filesystem or network access; it reads only its request fields.
 ## Prohibitions
-- `missing-dtstart-refusal`: The operation must refuse (throw `TypeError`) a request whose `dtstart` is not a string.
-- `missing-window-refusal`: The operation must refuse (throw `TypeError`) a request whose `window.start` or `window.end` is not a string.
-- `non-utc-basic-form-refusal`: The operation must refuse (throw `Error` naming the field) when `dtstart` or any `exdate`/`rdate` value does not match the RFC 5545 basic UTC form `/^\d{8}T\d{6}Z$/` — a TZID or local-time value is refused loudly, never silently misparsed as UTC.
-- `no-second-expander`: The operation must not hand-implement FREQ/BYDAY/BYMONTHDAY/WKST iteration or its own RDATE/EXDATE set-difference; it must call only the `rrule` package's exported `rrulestr`.
+- `missing-dtstart-refusal`: The operation must refuse (throw `TypeError`) a request whose `dtstart` is not a string. [claims: malformed-input-outside-domain]
+- `missing-window-refusal`: The operation must refuse (throw `TypeError`) a request whose `window.start` or `window.end` is not a string. [claims: malformed-input-outside-domain]
+- `non-utc-basic-form-refusal`: The operation must refuse (throw `Error` naming the field) when `dtstart` or any `exdate`/`rdate` value does not match the `RFC 5545` basic UTC form `/^\d{8}T\d{6}Z$/` — a TZID or local-time value is refused loudly, never silently misparsed as UTC. [claims: local-time-needs-a-zone-database]
+- `no-second-expander`: The operation must not hand-implement FREQ/BYDAY/BYMONTHDAY/WKST iteration or its own RDATE/EXDATE set-difference; it must call only the `rrule` package's exported `rrulestr`. [claims: reuse-follows-from-single-owner, dep-rrule]
 ## Laws
 - `primitives-exist-once` | 561 Group working discipline | 2026-08-30 | CLAUDE.md | Applies to this operation's own recurrence-expansion step. | RRULE parsing and expansion is delegated to the maintained `rrule` npm library rather than re-authored, per the standards-first data rule.
 - `fabricate-do-not-hand-write` | 561 Group working discipline, dispatch-agents skill | 2026-09-04 | .claude/skills/dispatch-agents/SKILL.md | Applies to this whole operation source file. | The operation is born through the jsnode fabrication line from this work order, never hand-written.
@@ -19,6 +19,11 @@
 - `node-esm-operation` | Node.js | v24.2.0+ | https://nodejs.org/docs/v24/api/esm.html | Applies to the .mjs operation and its import.meta.main guard. | The package uses one executable ESM operation source file eligible for downstream staged package-birth assays.
 ## Open questions
 none
+## Claims
+- `dep-rrule` | measured | dependency | rrule@2.8.1 is published on the Group registry | none | data/records/2026-10-19-work-order-evidence/npm-view-rrule-2-8-1.json | sha256:4da38d36f75d23cd4d56aaa3770869f63c5d4123b062b767b639716df8ef92fd | npm view of rrule@2.8.1 returned its name, version and integrity (2026-10-19)
+- `malformed-input-outside-domain` | derived | world | A request or field not of its declared type lies outside the operation's input domain | none | constraint:node-esm-operation; citation:Red Cup reconcile-typed-boundaries skill, a boundary admits only its declared type | Refusing an out-of-domain input is the typed boundary's own behavior, not a further choice
+- `reuse-follows-from-single-owner` | derived | world | The primitive this operation composes has one owner, published at the exact version this order pins | none | constraint:primitives-exist-once; claim:dep-rrule | The law places the primitive once in its owner, and the pinned owner is on the registry, so composing it leaves nothing to reimplement and a second implementation is outside what the law permits
+- `local-time-needs-a-zone-database` | derived | world | A TZID or local-time value names an instant only against a time-zone database this operation does not read | none | constraint:rfc-5545-icalendar; requirement:utc-only-basic-form | RFC 5545 gives a local or TZID date-time its meaning through the zone it names, and the requirement fixes the first version to the basic UTC form, so such a value read as UTC would be silently wrong
 ## Package
 ```json
 {"packageName":"@red-cup-engineering/expand-recurrence-rule-service","packageVersion":"0.1.0","license":"MIT","dependencies":{"rrule":"2.8.1"},"devDependencies":{}}
