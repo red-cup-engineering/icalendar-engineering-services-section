@@ -4,8 +4,7 @@
   "description": "Owns iCalendar (RFC 5545) scheduling data -- VEVENT recurrence rules, DTSTART/EXDATE/RDATE, and due-event derivation -- shared across the tree's separately implemented schedulers.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/red-cup-engineering/computer-serialized-content-engineering-services-section.git",
-    "directory": "services/icalendar-services-section"
+    "url": "git+https://github.com/red-cup-engineering/icalendar-services-section.git"
   },
   "type": "module",
   "keywords": [
