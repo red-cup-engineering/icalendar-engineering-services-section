@@ -24,7 +24,11 @@ const canonicalDate=value=>typeof value==='string' && ISO_DATE.test(value) &&
 const safeText=value=>typeof value==='string' && value.trim()!=='' &&
   value.length<4096 && !/[\u0000-\u0009\u000b-\u001f\u007f]/u.test(value);
 const sourceUrl=value=>{
-  if(typeof value!=='string'||value.length>2048) return false;
+  // WHATWG URL silently discards embedded CR/LF/TAB. RFC 5545 emits the
+  // original string as a URL property, so reject source bytes that could
+  // become extra calendar lines rather than trusting a normalized URL object.
+  if(typeof value!=='string'||value.length>2048 ||
+      /[\u0000-\u0020\u007f]/u.test(value)) return false;
   try{
     const url=new URL(value);
     return url.protocol==='https:' && Boolean(url.hostname) &&
