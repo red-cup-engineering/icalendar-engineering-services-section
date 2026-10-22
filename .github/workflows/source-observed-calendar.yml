@@ -1,0 +1,57 @@
+name: Original iCalendar source-observation receiving
+on:
+  push:
+    paths:
+      - 'scripts/render-source-observed-calendar.mjs'
+      - 'test/render-source-observed-calendar.test.mjs'
+      - 'package.json'
+      - '.github/workflows/source-observed-calendar.yml'
+  pull_request:
+    paths:
+      - 'scripts/render-source-observed-calendar.mjs'
+      - 'test/render-source-observed-calendar.test.mjs'
+      - 'package.json'
+      - '.github/workflows/source-observed-calendar.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-calendar-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Read exact original Red Cup source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Select native Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '22.18.0'
+      - name: Parse original calendar producer and receiving tests
+        run: |
+          node --check scripts/render-source-observed-calendar.mjs
+          node --check test/render-source-observed-calendar.test.mjs
+      - name: Run original iCalendar service's full native tests
+        run: npm test
+      - name: Verify public calendar source projection without a scheduler
+        run: |
+          node --input-type=module -e '
+            import {renderSourceObservedCalendar} from "./scripts/render-source-observed-calendar.mjs";
+            const value=renderSourceObservedCalendar({at:"2026-10-22T05:00:00.000Z",events:[{
+              id:"source:public-release-test",
+              summary:"Observed public process",
+              description:"Source-only, no booked job",
+              sourceUrl:"https://www.census.gov/data/what-is-data-census-gov/upcoming-releases.html",
+              observedAt:"2026-10-21T12:00:00.000Z",
+              startDate:"2026-11-19",
+              endDateInclusive:"2026-11-19",
+            }]});
+            if(!value.text.includes("DTEND;VALUE=DATE:20261120\r\n")) process.exit(2);
+            if(value.text.includes("VALARM")||value.text.includes("ATTENDEE")) process.exit(3);
+            console.log("Source-only RFC 5545 readout received: "+value.count+" event");
+          '
+      - name: Preserve original receiving limit
+        run: echo 'Native source bytes and tests pass only for RFC 5545 output; no Group workspace installation, source-right attestation, legal deadline time, Work execution, customer contract, payment, or publisher enrollment was received.' >> "$GITHUB_STEP_SUMMARY"
