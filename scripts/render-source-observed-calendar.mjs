@@ -82,7 +82,7 @@ export function renderSourceObservedCalendar({at,events}={}){
       throw new TypeError('event requires unique source ID, safe text, cited HTTPS source, real UTC observation and inclusive canonical DATE interval');
     ids.add(e.id);
     return e;
-  }).sort((a,b)=>a.id.localeCompare(b.id,'en'));
+  }).sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
   const lines=[
     property('BEGIN','VCALENDAR'),
     property('VERSION','2.0'),
