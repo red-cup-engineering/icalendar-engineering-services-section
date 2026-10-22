@@ -72,6 +72,13 @@ test('reject duplicate identity, malformed dates, source time from future and UR
     [{...fda,sourceUrl:'http://example.org'}],
     [{...fda,sourceUrl:'https://username:pass@fda.gov/a'}],
     [{...fda,sourceUrl:'https://fda.gov/a#untrusted'}],
+    // URL() normalizes raw control bytes, but the calendar encoder previously
+    // wrote the unchanged original URL and could inject a second VEVENT.
+    [{...fda,sourceUrl:'https://fda.gov/a\r\nBEGIN:VEVENT\r\nUID:evil'}],
+    [{...fda,sourceUrl:'https://fda.gov/a\nSUMMARY:forged'}],
+    [{...fda,sourceUrl:'https://fda.gov/a\tNEXT:field'}],
+    [{...fda,sourceUrl:'https://fda.gov/a\u0000broken'}],
+    [{...fda,sourceUrl:'https://fda.gov/a b'}],
     [{...fda,observedAt:'2026-10-23T00:00:00.000Z'}],
     [{...fda,id:'../bad'}],
   ];
