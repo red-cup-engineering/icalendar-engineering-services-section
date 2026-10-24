@@ -1,5 +1,5 @@
 {
-  "name": "@red-cup-engineering/icalendar-engineering-services-section",
+  "name": "@red-cup-engineering/icalendar-services-section",
   "version": "0.1.1",
   "description": "Owns iCalendar (RFC 5545) scheduling data -- VEVENT recurrence rules, DTSTART/EXDATE/RDATE, and due-event derivation -- shared across the tree's separately implemented schedulers.",
   "repository": {
