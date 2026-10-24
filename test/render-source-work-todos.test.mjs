@@ -3,7 +3,7 @@ import test from "node:test";
 import { renderSourceWorkTodos } from "../scripts/render-source-work-todos.mjs";
 
 const AT="2026-10-24T17:00:00.000Z";
-const NI = digit => "ni:///sha-256;"+String(digit).padStart(43,"A");
+const NI = digit => "ni:///sha-256;"+String(digit).padStart(43,"0");
 const work=(digit,extra={})=>({
   id:NI(digit),summary:"Receive customer-requested source Work",
   description:"Original work awaits independent acceptance",
