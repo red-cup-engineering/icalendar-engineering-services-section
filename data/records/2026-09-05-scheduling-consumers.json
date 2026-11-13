@@ -35,7 +35,7 @@
     },
     {
       "package": "@causeway-services/koios-news-schedule-delivery-activation-current",
-      "path": "lib/emsenn/services/561-group/services/public-services-section/services/public-social-services-section/services/public-media-services-section/services/public-news-media-services-section/services/koios-news/schedule-delivery-activation-current",
+      "path": "lib/emsenn/services/561-group/services/public-services-section/services/public-social-services-section/services/public-media-services-section/services/public-news-media-services-section/services/koios-news/koios-news-schedule-delivery-activation-engine",
       "whatItSchedules": "Koios News's current delivery-activation schedule (when a news delivery activates).",
       "cutOver": false,
       "nextStep": "Not found by jsnode_search under 'schedule'/'daily'/'timer' as a distinct package in this pass beyond the founder-named one; read its source to determine current representation (cron-like text vs ad hoc Date math) before modeling as VEVENT/RRULE through icalendar-engineering-services-section."
