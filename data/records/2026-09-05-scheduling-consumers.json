@@ -3,7 +3,7 @@
   "version": 1,
   "recordedAt": "2026-09-05T00:00:00Z",
   "movement": "oh duh we should like, share scheduling across ALL our code.",
-  "note": "Every row is a place in the tree where 'something is due at a time and recurs' is computed separately, per the founder's order and the receiver's jsnode-graph survey. icalendar-services-section (RFC 5545) is the shared owner going forward; cutOver:true rows have already been migrated onto it in this lot.",
+  "note": "Every row is a place in the tree where 'something is due at a time and recurs' is computed separately, per the founder's order and the receiver's jsnode-graph survey. icalendar-engineering-services-section (RFC 5545) is the shared owner going forward; cutOver:true rows have already been migrated onto it in this lot.",
   "rows": [
     {
       "package": "@red-cup-engineering/schedule-set-of-votes-service",
@@ -38,14 +38,14 @@
       "path": "lib/emsenn/services/561-group/services/public-services-section/services/public-social-services-section/services/public-media-services-section/services/public-news-media-services-section/services/koios-news/schedule-delivery-activation-current",
       "whatItSchedules": "Koios News's current delivery-activation schedule (when a news delivery activates).",
       "cutOver": false,
-      "nextStep": "Not found by jsnode_search under 'schedule'/'daily'/'timer' as a distinct package in this pass beyond the founder-named one; read its source to determine current representation (cron-like text vs ad hoc Date math) before modeling as VEVENT/RRULE through icalendar-services-section."
+      "nextStep": "Not found by jsnode_search under 'schedule'/'daily'/'timer' as a distinct package in this pass beyond the founder-named one; read its source to determine current representation (cron-like text vs ad hoc Date math) before modeling as VEVENT/RRULE through icalendar-engineering-services-section."
     },
     {
       "package": "@red-cup-engineering/alpaca-account-kill-switch-service",
       "path": "lib/emsenn/services/561-group/services/engineering-services-section/services/computer-engineering-services-section/services/computer-systems-engineering-services-section/services/web-services-section/services/web-platform-services-section/services/web2-platform-services-section/services/web2-financial-platform-services-section/services/web2-financial-brokerage-platform-services-section/services/alpaca-engineering-services-section/services/alpaca-account-kill-switch-service",
       "whatItSchedules": "Runs on its own 30-minute market-hours systemd timer; on trip, disables every existing Alpaca loop timer.",
       "cutOver": false,
-      "nextStep": "systemd OnCalendar= timer, not a Node RRULE computation -- out of this lot's scope. If a unified due-view is ever wanted across systemd timers and in-code schedules, translate each unit's OnCalendar= expression to an equivalent RFC 5545 RRULE for read-only comparison; never make icalendar-services-section itself own systemd unit files (that stays LAGOON/qtOps custody per org-layering)."
+      "nextStep": "systemd OnCalendar= timer, not a Node RRULE computation -- out of this lot's scope. If a unified due-view is ever wanted across systemd timers and in-code schedules, translate each unit's OnCalendar= expression to an equivalent RFC 5545 RRULE for read-only comparison; never make icalendar-engineering-services-section itself own systemd unit files (that stays LAGOON/qtOps custody per org-layering)."
     },
     {
       "package": "@red-cup-engineering/alpaca-alert-watch-service",
