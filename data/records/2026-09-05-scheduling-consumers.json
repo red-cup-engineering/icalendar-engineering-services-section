@@ -13,7 +13,7 @@
       "nextStep": "Done this lot (0.1.0 -> 0.2.0, additive): each scheduled vote's instant is now computed as a bare-DTSTART VEVENT (RFC 5545 SS3.8.5.2, no RRULE) via @red-cup-engineering/expand-recurrence-rule-service@0.1.0, exposed as a new `dtstart` field alongside the pre-existing `time`. Published and fresh-install tested green."
     },
     {
-      "package": "@red-cup-engineering/education-platform-service",
+      "package": "@red-cup-engineering/education-platform-computer-game-system-engineering-services-section",
       "path": "lib/emsenn/services/561-group/services/engineering-services-section/services/computer-engineering-services-section/services/computer-systems-engineering-services-section/services/computer-game-system-services-section/services/education-platform-service",
       "whatItSchedules": "src/srs.mts, src/session.mts: an FSRS-lite spaced-repetition next-due instant per learning item.",
       "cutOver": true,
@@ -55,11 +55,11 @@
       "nextStep": "Same as alpaca-account-kill-switch-service: a systemd timer, not a Node scheduling call site. No code cutover applicable; note only."
     },
     {
-      "package": "@red-cup-engineering/footing",
+      "package": "@red-cup-engineering/footing-computer-game-system-engineering-services-section",
       "path": "lib/emsenn/services/561-group/services/engineering-services-section/services/computer-engineering-services-section/services/computer-systems-engineering-services-section/services/computer-game-system-services-section/services/footing",
       "whatItSchedules": "Daily-tournament plumbing shared by every seeded-daily 561 Group game (ruinfold, durante, aletheon, farstone, world-hosting): UTC date arithmetic for the tournament day boundary, submission guards keyed to that boundary.",
       "cutOver": false,
-      "nextStep": "Express the daily UTC tournament-day boundary as a FREQ=DAILY RRULE (or the day's own DTSTART/DTEND pair) via expand-recurrence-rule-service instead of hand-rolled UTC date arithmetic. Touches 5 declared dependents (@561-group/aletheon, @561-group/ruinfold-daily, @causeway-services/farstone, @red-cup-engineering/durante, @red-cup-engineering/world-hosting) so this cutover needs its own bounded lot with each dependent's tests re-run."
+      "nextStep": "Express the daily UTC tournament-day boundary as a FREQ=DAILY RRULE (or the day's own DTSTART/DTEND pair) via expand-recurrence-rule-service instead of hand-rolled UTC date arithmetic. Touches 5 declared dependents (@561-group/aletheon, @561-group/ruinfold, @causeway-services/farstone.561.group, @red-cup-engineering/durante, @red-cup-engineering/world-hosting) so this cutover needs its own bounded lot with each dependent's tests re-run."
     },
     {
       "package": "@red-cup-engineering/cartridge",

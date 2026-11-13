@@ -56,7 +56,7 @@ qualify its source, audience and office permissions:
 
 \`\`\`js
 import { renderSourceWorkTodos } from
-  "@red-cup-engineering/icalendar-services-section/render-source-work-todos";
+  "@red-cup-engineering/icalendar-engineering-services-section/render-source-work-todos";
 const projection = renderSourceWorkTodos({
   at: "2026-10-24T17:00:00.000Z",
   work: [{

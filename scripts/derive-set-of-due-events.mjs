@@ -1,4 +1,4 @@
-import { expandRecurrenceRule } from "@red-cup-engineering/icalendar-services-section/expand-recurrence-rule";
+import { expandRecurrenceRule } from "@red-cup-engineering/icalendar-engineering-services-section/expand-recurrence-rule";
 
 const BASIC_UTC_DATE_TIME = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/u;
 // Completion testimony requires a real, explicit ISO 8601 instant. Date.parse
