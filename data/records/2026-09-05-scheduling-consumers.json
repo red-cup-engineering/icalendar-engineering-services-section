@@ -7,7 +7,7 @@
   "rows": [
     {
       "package": "@red-cup-engineering/schedule-set-of-votes-service",
-      "path": "lib/emsenn/services/561-group/services/engineering-services-section/services/computer-engineering-services-section/services/computer-systems-engineering-services-section/services/computer-blockchain-system-services-section/services/hive-services-section/services/curation-services-section/services/schedule-set-of-votes-service",
+      "path": "lib/emsenn/services/561-group/services/engineering-services-section/services/computer-engineering-services-section/services/computer-systems-engineering-services-section/services/computer-blockchain-system-services-section/services/hive-services-section/services/curation-engineering-services-section/services/schedule-set-of-votes-service",
       "whatItSchedules": "A day's Hive curation votes for one account: each candidate post's scheduled vote instant, weighted and budgeted by policy.",
       "cutOver": true,
       "nextStep": "Done this lot (0.1.0 -> 0.2.0, additive): each scheduled vote's instant is now computed as a bare-DTSTART VEVENT (RFC 5545 SS3.8.5.2, no RRULE) via @red-cup-engineering/expand-recurrence-rule-service@0.1.0, exposed as a new `dtstart` field alongside the pre-existing `time`. Published and fresh-install tested green."
@@ -42,7 +42,7 @@
     },
     {
       "package": "@red-cup-engineering/alpaca-account-kill-switch-service",
-      "path": "lib/emsenn/services/561-group/services/engineering-services-section/services/computer-engineering-services-section/services/computer-systems-engineering-services-section/services/web-services-section/services/web-platform-services-section/services/web2-platform-services-section/services/web2-financial-platform-services-section/services/web2-financial-brokerage-platform-services-section/services/alpaca-services-section/services/alpaca-account-kill-switch-service",
+      "path": "lib/emsenn/services/561-group/services/engineering-services-section/services/computer-engineering-services-section/services/computer-systems-engineering-services-section/services/web-services-section/services/web-platform-services-section/services/web2-platform-services-section/services/web2-financial-platform-services-section/services/web2-financial-brokerage-platform-services-section/services/alpaca-engineering-services-section/services/alpaca-account-kill-switch-service",
       "whatItSchedules": "Runs on its own 30-minute market-hours systemd timer; on trip, disables every existing Alpaca loop timer.",
       "cutOver": false,
       "nextStep": "systemd OnCalendar= timer, not a Node RRULE computation -- out of this lot's scope. If a unified due-view is ever wanted across systemd timers and in-code schedules, translate each unit's OnCalendar= expression to an equivalent RFC 5545 RRULE for read-only comparison; never make icalendar-services-section itself own systemd unit files (that stays LAGOON/qtOps custody per org-layering)."
