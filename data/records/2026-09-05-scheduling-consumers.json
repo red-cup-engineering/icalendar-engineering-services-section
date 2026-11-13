@@ -27,8 +27,8 @@
       "nextStep": "Read the cadence-want shape; if it is expressible as FREQ=... (e.g. every N hours/days), model it as an RRULE and window-bound occurrences via expand-recurrence-rule-service instead of hand-rolled cadence arithmetic. Requires reading observer-market-services-section's consumer too before changing the shared shape."
     },
     {
-      "package": "@coesite-operations/scheduled-activity-delivery-service",
-      "path": "lib/emsenn/services/561-group/services/operations-services-section/services/agent-services-section/services/scheduled-activity-delivery-service",
+      "package": "@coesite-operations/scheduled-activity-delivery-operations-services-section",
+      "path": "lib/emsenn/services/561-group/services/operations-services-section/services/agent-services-section/services/scheduled-activity-delivery-operations-services-section",
       "whatItSchedules": "Portable ScheduleDelivery for colony-owned, contracted, idempotent ActivityStreams delivery (delivery retry/backoff timing).",
       "cutOver": true,
       "nextStep": "Done this lot (0.2.0 -> 0.2.1; published 0.1.1 -> 0.2.1, only 0.1.1 was ever actually published, so the diff baseline was 0.1.1). runDue()'s occurrence/scheduledFor math for a recurring schedule (firstDueAt+intervalSeconds) now composes @red-cup-engineering/expand-recurrence-rule-service (a bare-DTSTART VEVENT with a FREQ=SECONDLY;INTERVAL=n RRULE, window {start: firstDueAt, end: at}, occurrence index = occurrences.length-1) instead of hand-rolled Math.floor division. Retry/backoff timing (recoverAfter, the 20s buffer) is untouched -- that is a distinct scheduling call site the founder's order did not name here. Tests 50/45 pass baseline -> 51/46 pass after (new test icalendar-recurrence-due.test.mjs), 0 non-canonical lockfile URLs, additive tarball diff vs 0.1.1, published as 0.2.1, fresh-install verified. Receipt: ni:///sha-256;PD0hafquwVO_n7mgCuWN_OPIuF6SEJjMjKUjKs1HYEo (operations-services-section data/logs)."
