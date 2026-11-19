@@ -1,0 +1,32 @@
+{
+  "name": "@red-cup-engineering/icalendar-engineering-services-section",
+  "version": "0.1.3-dev.0",
+  "description": "Owns iCalendar (RFC 5545) scheduling data -- VEVENT recurrence rules, DTSTART/EXDATE/RDATE, and due-event derivation -- shared across the tree's separately implemented schedulers.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/icalendar-engineering-services-section.git"
+  },
+  "type": "module",
+  "keywords": [
+    "engineering"
+  ],
+  "exports": {
+    "./derive-set-of-due-events": "./scripts/derive-set-of-due-events.mjs",
+    "./expand-recurrence-rule": "./scripts/expand-recurrence-rule.mjs",
+    "./render-source-observed-calendar": "./scripts/render-source-observed-calendar.mjs",
+    "./render-source-work-todos": "./scripts/render-source-work-todos.mjs"
+  },
+  "dependencies": {},
+  "private": false,
+  "files": [
+    "package.json",
+    "README*",
+    "LICENSE*",
+    "scripts"
+  ],
+  "license": "MIT",
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/561-group/.github/blob/main/TIPS.md"
+  }
+}
