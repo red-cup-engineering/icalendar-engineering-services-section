@@ -62,8 +62,8 @@ export function deriveSetOfDueEvents(request) {
       throw new TypeError("each event needs a distinct source id");
     seen.add(event.id);
     if (typeof event?.dtstart !== "string") throw new TypeError("each event must have a string dtstart");
-    const hasRecord=Object.prototype.hasOwnProperty.call(lastDone,event.id);
-    const doneAt=hasRecord?observedInstant(lastDone[event.id],"lastDone["+event.id+"]"):null;
+    const hasReceipt=Object.prototype.hasOwnProperty.call(lastDone,event.id);
+    const doneAt=hasReceipt?observedInstant(lastDone[event.id],"lastDone["+event.id+"]"):null;
     if (doneAt!==null && doneAt>now)
       throw new RangeError("lastDone must not come from the future relative to observed now");
 
